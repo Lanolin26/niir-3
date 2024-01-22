@@ -1,0 +1,47 @@
+% !TEX program = xelatex
+% Author: Artem Kiselev
+\documentclass[xetex,a4paper,14pt]{extarticle}
+
+\input{lib/preamble}
+
+\faculty{Программная инженерия и компьютерная техника}
+\eduprogram{09.04.04 --- Программная инженерия}
+\speciality{Системное и прикладное программное обеспечение}
+\title{Сравнительный анализ инструментов мониторинга в ИТ-системах и их воздействие на рабочие процессы системных администраторов}
+\author{Киселев Артем Олегович}
+\edugroup{P4215}
+\teacher{Белозубов Александр Владимирович, преподаватель факультета программной инженерии и компьютерной техники, кандидат технических наук, Университет ИТМО}
+\city{Санкт-Петербург}
+\date{\the\year}
+\currdate{\the\day.0\the\month.\the\year}
+
+\input{lib/preamble/pdf.tex} 
+
+\begin{document}
+    \titulnik
+
+    \setcounter{page}{2}
+
+    % Содержание  
+    \tableofcontents
+    \clearpage
+
+     % \input{include/0-glossary.tex}
+    \input{include/0-introdaction.tex}
+
+    \section{Выполнение задания}
+        \input{include/list1.tex}
+        \input{include/list2.tex}
+        \input{include/list3.tex}
+        \input{include/list4.tex}
+        \input{include/list5.tex}
+    \clearpage
+
+    \input{include/0-conclusion.tex}
+    \input{include/0-referencelist.tex}
+
+    % Приложения
+    % \input{include/a-app}
+    % \input{include/b-app}
+
+\end{document}

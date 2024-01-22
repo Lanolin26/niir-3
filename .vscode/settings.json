@@ -1,0 +1,29 @@
+{
+    "latex-workshop.docker.enabled": true,
+    "latex-workshop.docker.image.latex": "lanolin25/docker-latex:v1.6",
+    "latex-workshop.latex.clean.subfolder.enabled": true,
+    "latex-workshop.latex.tools": [
+        {
+            "name": "latexmk",
+            "command": "latexmk",
+            "args": [
+                "-verbose",
+                "-xelatex",
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-aux-directory=%OUTDIR%",
+                "-output-directory=%OUTDIR%",
+                "-jobname=report",
+                "%DOC%"
+            ]
+        }
+    ],
+    "latex-workshop.latex.outDir": "%DIR%/output",
+    "latex-workshop.view.pdf.viewer": "tab",
+    "latex-workshop.view.pdf.ref.viewer": "tabOrBrowser",
+    "latex-workshop.intellisense.package.dirs": [
+        "%DIR%/style"
+    ],
+    "latex-workshop.latex.autoBuild.run": "onSave"
+}

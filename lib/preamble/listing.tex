@@ -1,0 +1,43 @@
+%---------------------------Listing------------------------------------%
+\usepackage{listings}
+\DeclareCaptionFormat{listing}{
+    \parbox{\linewidth}{
+        \colorbox{сaptionbk}{
+            \parbox{\linewidth}{
+                \small#1#2#3
+            }
+        }
+        \vskip-4pt
+    }
+}
+% \captionsetup[lstlisting]{format=listing, labelfont=white, textfont=white}
+\lstset{% Собственно настройки вида листинга
+    inputencoding=utf8, 
+    extendedchars=\true, 
+    language=Java,
+    keepspaces=true,            % поддержка кириллицы  и пробелов в комментариях
+    basicstyle=\footnotesize,,  % размер и начертание шрифта для подсветки кода
+    numbers=left,               % где поставить нумерацию строк (слева\справа)
+    numberstyle=\tiny,          % размер шрифта для номеров строк
+    stepnumber=1,               % размер шага между двумя номерами строк
+    numbersep=5pt,              % как далеко отстоят номера строк от подсвечиваемого кода
+    showspaces=false,           % показывать или нет пробелы специальными отступами
+    showstringspaces=false,     % показывать или нет пробелы в строках
+    showtabs=false,             % показывать или нет табуляцию в строках
+    frame=single,               % рисовать рамку вокруг кода
+    tabsize=2,                  % размер табуляции по умолчанию равен 2 пробелам
+    captionpos=t,               % позиция заголовка вверху [t] или внизу [b] 
+    breaklines=true,            % автоматически переносить строки (да\нет)
+    breakatwhitespace=false,    % переносить строки только если есть пробел
+    % escapeinside={\\*}{*)},      % если нужно добавить комментарии в коде
+    literate={--}{{-{}-}}2,     % Корректно отображать двойной дефис
+    literate={---}{{-{}-{}-}}3,  % Корректно отображать тройной дефис
+    escapechar=~,
+    frame=lrb,
+    xleftmargin=\fboxsep,
+    xrightmargin=-\fboxsep,
+    otherkeywords={!,!=,~,\$,*,\&,\%/\%,\%*\%,\%\%,<-,<<-,\_,/},
+}
+%----------------------------------------------------------------------%
+
+\input{lib/preamble/listing-yaml.tex}

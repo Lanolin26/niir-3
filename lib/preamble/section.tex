@@ -1,0 +1,115 @@
+%---Содержание---------------------------------------------------------%
+\usepackage{tocloft}
+\renewcommand{\cfttoctitlefont}{\hspace{0.38\textwidth}\MakeTextUppercase}
+\renewcommand{\cftsecfont}{\hspace{0pt}}            % Имена секций в содержании не жирным шрифтом
+\renewcommand\cftsecleader{\cftdotfill{\cftdotsep}} % Точки для секций в содержании
+\renewcommand\cftsecpagefont{\mdseries}             % Номера страниц не жирные
+% \cftsetpnumwidth{10pt}
+\setcounter{tocdepth}{3}                            % Глубина оглавления, до subsubsection
+%----------------------------------------------------------------------%
+
+%---Список иллюстративного материала-----------------------------------%
+\renewcommand{\cftloftitlefont}{\hspace{0.17\textwidth}\MakeTextUppercase}
+\renewcommand{\cftfigfont}{Рисунок }
+\addto\captionsrussian{\renewcommand\listfigurename{Список иллюстративного материала}}
+%----------------------------------------------------------------------%
+
+%----Список табличного материала---------------------------------------%
+\renewcommand{\cftlottitlefont}{\hspace{0.2\textwidth}\MakeTextUppercase}
+\renewcommand{\cfttabfont}{Таблица }
+\addto\captionsrussian{\renewcommand\listtablename{Список табличного материала}}
+%----------------------------------------------------------------------%
+
+%---Формат подрисуночных надписей--------------------------------------%
+\RequirePackage{caption}
+\DeclareCaptionLabelSeparator{defffis}{ -- } % Разделитель
+\captionsetup[figure]{justification=centering, labelsep=defffis, format=plain} % Подпись рисунка по центру
+\captionsetup[table]{justification=raggedright, labelsep=defffis, format=plain, singlelinecheck=false} % Подпись таблицы слева
+\addto\captionsrussian{\renewcommand{\figurename}{Рисунок}} % Имя фигуры
+\addto\captionsrussian{\renewcommand{\lstlistingname}{Листинг}}
+\addto\captionsrussian{\renewcommand{\tablename}{Таблица}}
+%----------------------------------------------------------------------%
+
+%---Заголовки секций в оглавлении в верхнем регистре-------------------%
+% 
+\usepackage{textcase}
+\makeatletter
+\let\oldcontentsline\contentsline
+\def\contentsline#1#2{
+    \expandafter\ifx\csname l@#1\endcsname\l@section
+        \expandafter\@firstoftwo
+    \else
+        \expandafter\@secondoftwo
+    \fi
+    {\oldcontentsline{#1}{\MakeTextUppercase{#2}}}
+    {\oldcontentsline{#1}{#2}}
+}
+\makeatother
+%----------------------------------------------------------------------%
+
+%---Оформление заголовков----------------------------------------------%
+\usepackage[compact,explicit]{titlesec}
+\titleformat{\section}{}{}{12.5mm}{\centering{\thesection\quad\MakeTextUppercase{#1}}\vspace{1.5em}}
+\titleformat{\subsection}[block]{\vspace{1em}}{}{12.5mm}{\thesubsection\quad#1\vspace{1em}}
+\titleformat{\subsubsection}[block]{\vspace{1em}\normalsize}{}{12.5mm}{\thesubsubsection\quad#1\vspace{1em}}
+\titleformat{\paragraph}[block]{\normalsize}{}{12.5mm}{\MakeTextUppercase{#1}}
+%----------------------------------------------------------------------%
+
+%----Секции без номеров (введение, заключение...), вместо section*{}---%
+\newcommand{\anonsection}[1]{
+    \phantomsection % Корректный переход по ссылкам в содержании
+	\paragraph{\centerline{{#1}}\vspace{1em}}
+    \addcontentsline{toc}{section}{#1}
+}
+%----------------------------------------------------------------------%
+
+%---Секция для аннотации (она не включается в содержание)--------------%
+\newcommand{\annotation}[1]{
+    \paragraph{\centerline{{#1}}\vspace{1em}}
+}
+%----------------------------------------------------------------------%
+
+%---Секция для списка иллюстративного материала------------------------%
+\newcommand{\lof}{
+    \clearpage
+    \phantomsection
+    \listoffigures
+    \addcontentsline{toc}{section}{\listfigurename}
+}
+%----------------------------------------------------------------------%
+
+%---Секция для списка табличного материала-----------------------------%
+\newcommand{\lot}{
+    \clearpage
+    \phantomsection
+    \listoftables
+    \addcontentsline{toc}{section}{\listtablename}
+}
+%----------------------------------------------------------------------%
+
+%----Секции для приложений---------------------------------------------%
+\newcommand{\appsection}[1]{
+    \clearpage
+    \phantomsection
+    \centerline{{#1}}
+    \addcontentsline{toc}{section}{{#1}}
+}
+%----------------------------------------------------------------------%
+
+%----Библиография: отступы и межстрочный интервал----------------------%
+\makeatletter
+\renewenvironment{thebibliography}[1]
+    {\section*{\refname}
+        \list{\@biblabel{\@arabic\c@enumiv}}
+           {\settowidth\labelwidth{\@biblabel{#1}}
+            \leftmargin\labelsep
+            \itemindent 16.7mm
+            \@openbib@code
+            \usecounter{enumiv}
+            \let\p@enumiv\@empty
+            \renewcommand\theenumiv{\@arabic\c@enumiv}
+        }
+        \setlength{\itemsep}{0pt}
+    }
+\makeatother
+%----------------------------------------------------------------------%

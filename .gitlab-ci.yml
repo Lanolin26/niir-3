@@ -1,0 +1,44 @@
+stages:
+    - build
+    - release
+
+variables:
+    OUTPUT_FILE: $CI_PROJECT_NAME
+    PDF_NAME: $OUTPUT_FILE.pdf
+    ARTIFACT_URL: "${CI_PROJECT_URL}/-/jobs/artifacts/job-${CI_JOB_ID}/download?job=build_job"
+    OUTPUT_DIR: output
+    
+build_job:
+    stage: build
+    image: lanolin25/docker-latex:v1.6
+    only:
+        - master
+    script:
+        - make build
+        - make clean
+    artifacts:
+        name: "$CI_PROJECT_NAME"
+        paths:
+            - ${OUTPUT_DIR}/${PDF_NAME}
+
+release_job:
+    stage: release
+    image: registry.gitlab.com/gitlab-org/release-cli:latest
+    only:
+        - master
+    needs:
+        - job: build_job
+          artifacts: true
+    script:
+        - echo "Publish new release"
+    release:
+        name: "$CI_PROJECT_NAME Release"
+        description: "Build a PDF file from LaTeX source."
+        ref: $CI_COMMIT_SHA
+        tag_name: "job-$CI_JOB_ID"
+        assets:
+            links:
+                - name: "${OUTPUT_FILE}.zip"
+                  url: "${ARTIFACT_URL}"
+                  filepath: "/$CI_COMMIT_SHA/${PDF_NAME}"
+                  link_type: package

@@ -1,0 +1,20 @@
+%------------------Подсчет количества страниц--------------------------%
+\usepackage{lastpage} % Ссылка на количество страниц
+% Начало нумерации страниц
+%----------------------------------------------------------------------%
+
+%--------------Нумерация страниц посередине сверху---------------------%
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\cfoot{\textrm{\thepage}}
+\fancyheadoffset{0mm}
+\fancyfootoffset{0mm}
+\setlength{\headheight}{17pt}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \cfoot{\textrm{\thepage}}
+}
+%-------------------------------------------------------------------%

@@ -1,0 +1,16 @@
+.gitignore
+.gitlab-ci.yml
+Dockerfile
+README.md
+.git
+output
+*.pdf
+.vscode
+*.lof
+*.lot
+*.code-workspace
+*.zip
+*.nav
+*.snm
+*.toc
+*.synctex(busy)

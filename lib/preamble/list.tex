@@ -1,0 +1,15 @@
+%---Списки-------------------------------------------------------------%
+\usepackage{enumitem}
+\setlist[enumerate,itemize]{leftmargin=12.7mm} % Отступы в списках
+
+\makeatletter
+    \AddEnumerateCounter{\asbuk}{\@asbuk}{м)}
+\makeatother
+
+\setlist{nolistsep, nosep,wide}                 % Нет отступов между пунктами списка
+\renewcommand{\labelitemi}{--}                  % Маркет списка --
+\renewcommand{\labelenumi}{\asbuk{enumi})}      % Список второго уровня
+\renewcommand{\labelenumii}{\arabic{enumii})}   % Список третьего уровня
+
+\setlist[2]{labelindent=1\parindent} % отступ метки от края равен двум абзацным отступам
+%----------------------------------------------------------------------%

@@ -1,0 +1,38 @@
+%----------------------Шрифты, xelatex---------------------------------%
+\usepackage{fontspec} % XeTeX
+\usepackage{xunicode} % Unicode для XeTeX
+\usepackage{xltxtra}  % Верхние и нижние индексы
+\usepackage{polyglossia} % Русский язык
+
+\defaultfontfeatures{Ligatures=TeX}
+\setdefaultlanguage{russian}
+\setmainlanguage{russian}
+\setotherlanguage{english}
+\setkeys{russian}{babelshorthands=true}
+
+\defaultfontfeatures[PT Serif] {
+    Extension = .ttf,
+    Path = fonts/,
+    UprightFont = PT-Serif_Regular,
+    BoldFont = PT-Serif_Bold,
+    ItalicFont = PT-Serif_Italic,
+    BoldItalicFont = PT-Serif_Bold-Italic
+}
+
+\defaultfontfeatures[JB MonoNL] {
+    Extension = .ttf,
+    Path = fonts/,
+    UprightFont = JetBrainsMonoNL-Regular,
+    BoldFont = JetBrainsMonoNL-Bold,
+    ItalicFont = JetBrainsMonoNL-Italic,
+    BoldItalicFont = JetBrainsMonoNL-BoldItalic
+}
+
+\setmainfont{PT Serif}
+%\setromanfont{PT Serif}
+%\setsansfont{PT Serif}
+\setmonofont{JB MonoNL}
+
+\setmainfont[Ligatures=TeX]{PT Serif}
+\newfontfamily\cyrillicfont{PT Serif}[Script=Cyrillic]
+%----------------------------------------------------------------------%

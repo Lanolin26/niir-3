@@ -1,0 +1,16 @@
+%---Математика---------------------------------------------------------%
+\usepackage{amssymb,amsfonts,amsmath,unicode-math} % 
+% \setmathfont{XITS Math}
+%----------------------------------------------------------------------%
+
+%---Формулы------------------------------------------------------------%
+\numberwithin{equation}{section}    % Формула вида секция.номер
+% Оформление библиографии и подрисуночных записей через точку
+\makeatletter
+\renewcommand*{\@biblabel}[1]{\hfill#1.}
+\renewcommand*\l@section{\@dottedtocline{1}{1em}{1em}}
+\renewcommand{\thefigure}{\thesection.\arabic{figure}} % Формат рисунка секция.номер
+\renewcommand{\thetable}{\thesection.\arabic{table}}   % Формат таблицы секция.номер
+\def\redeflsection{\def\l@section{\@dottedtocline{1}{0em}{10em}}}
+\makeatother
+%----------------------------------------------------------------------%
