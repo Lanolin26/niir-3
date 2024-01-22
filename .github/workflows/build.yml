@@ -8,9 +8,6 @@ on:
 
 env:
   DOCKER_IMAGE: 'lanolin25/docker-latex:v1.6'
-  OUTPUT_FILE: report
-  PDF_NAME: $OUTPUT_FILE.pdf
-  OUTPUT_DIR: output
 
 jobs:
   Build:
@@ -18,20 +15,22 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
+      
       - name: Pull Docker to local
         run: |
           docker pull ${DOCKER_IMAGE}
+      
       - name: Build PDF
-        run: |
-          docker run --rm -i -v ${PWD}:/build:Z ${DOCKER_IMAGE} sh -c "OUTPUT_FILE=${OUTPUT_FILE} OUTPUT_DIR=${OUTPUT_DIR} make build"
+        run: docker run --rm -i -v ${PWD}:/build:Z ${DOCKER_IMAGE} sh -c "OUTPUT_FILE=report-${{ github.ref_name }} make artifacts"
+
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
           name: artifacts
           path: |
-            ${OUTPUT_DIR}/${OUTPUT_FILE}.pdf
-            ${OUTPUT_DIR}/${OUTPUT_FILE}.log
-
+            artifact/report-${{ github.ref_name }}.pdf
+            artifact/report-${{ github.ref_name }}.log
+  
   Release:
      runs-on: ubuntu-latest
      needs: Build
@@ -41,12 +40,12 @@ jobs:
          uses: actions/download-artifact@v3
          with:
            name: artifacts
+       
        - name: Create release on tag
          uses: softprops/action-gh-release@v1
          with:
-           name: "Release $GITHUB_REF_NAME"
            body: |
               New release of LaTeX document
            files: |
-             ${OUTPUT_FILE}.pdf
-             ${OUTPUT_FILE}.log
+             report-${{ github.ref_name }}.pdf
+             report-${{ github.ref_name }}.log
